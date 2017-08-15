@@ -95,7 +95,7 @@ TitleScene.prototype.update = function() {
 
 TitleScene.prototype.draw = function() {
     drawRect(0, 0, canvasWidth, canvasHeight, '#000', true);
-    drawText('INSERT TITLE HERE', canvasWidth / 2 - 110, canvasHeight / 2 - 40, 'VT323', '140px', '#fff', true);
+    drawText('INSERT TITLE HERE', canvasWidth / 2 - 480, canvasHeight / 2 - 40, 'VT323', '140px', '#fff', true);
     drawText('Replace this crap', canvasWidth / 2 - 105, canvasHeight / 2 + 50, 'VT323', '22px', '#fee', true);
 }
 
