@@ -1,0 +1,4 @@
+body > div:first-child {
+    margin: 75px auto 0; 
+    width: 1024px;
+}
