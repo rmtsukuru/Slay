@@ -1,5 +1,5 @@
-const mapTileWidth = 50;
-const mapTileHeight = 50;
+const mapTileWidth = 40;
+const mapTileHeight = 30;
 
 const TILE_SIZE = 32;
 
@@ -12,11 +12,11 @@ for (var i = 0; i < mapTileHeight; i++) {
     tiles.push(row);
 }
 
-tiles[32][40] = 1;
+tiles[12][20] = 1;
 tiles[5][7] = 1;
 tiles[6][7] = 1;
-tiles[10][28] = 2;
-tiles[24][5] = 1;
-tiles[45][37] = 1;
+tiles[10][18] = 2;
+tiles[14][5] = 1;
+tiles[15][17] = 1;
 tiles[2][18] = 2;
 
