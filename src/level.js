@@ -148,6 +148,13 @@ function handleEntityCollision(entity) {
     });
 }
 
+function warpTo(mapId, mapX, mapY) {
+    currentMap = mapId;
+    loadMap();
+    player.x = mapX;
+    player.y = mapY;
+}
+
 function drawMinimap(ignoreCamera) {
     drawRect(744, 0, 280, 406, '#aaa', ignoreCamera);
     drawRect(746, 2, 276, 402, '#000', ignoreCamera);

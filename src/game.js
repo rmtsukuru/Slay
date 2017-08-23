@@ -1,5 +1,8 @@
 function configureGame() {
-    // If you need it for something. :)
+    currentMap = STARTING_MAP;
+    loadMap();
+    warp = new Warp(762, 74, 1, 125, 350);
+    entities.push(warp);
 }
 
 function update() {

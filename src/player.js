@@ -126,6 +126,7 @@ Player.prototype.update = function() {
     if (this.attackTimer > 0) {
         this.attackTimer--;
     }
+    handleEntityCollision(this);
     Entity.prototype.update.call(this);
 };
 
@@ -145,3 +146,9 @@ Player.prototype.draw = function() {
     }
     drawImage(image, this.x, this.y - (PLAYER_SIZE * PLAYER_SPRITE_MULTIPLIER));
 };
+
+Entity.prototype.handleEntityCollision = function(entity) {
+    if (entity instanceof Warp) {
+        warpTo(entity.destinationMap, entity.destinationX, entity.destinationY);
+    }
+}

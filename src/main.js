@@ -1,5 +1,6 @@
 var mainLoop;
 var player;
+var currentMap;
 
 var minimapEnabled = false;
 

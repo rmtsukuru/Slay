@@ -2,6 +2,7 @@ const mapTileWidth = 40;
 const mapTileHeight = 30;
 
 const TILE_SIZE = 32;
+const STARTING_MAP = 0;
 
 var tiles = [];
 for (var i = 0; i < mapTileHeight; i++) {
@@ -12,11 +13,26 @@ for (var i = 0; i < mapTileHeight; i++) {
     tiles.push(row);
 }
 
-tiles[12][20] = 1;
-tiles[5][7] = 1;
-tiles[6][7] = 1;
-tiles[10][18] = 2;
-tiles[14][5] = 1;
-tiles[15][17] = 1;
-tiles[2][18] = 2;
+function loadMap(mapId) {
+    mapId = mapId || currentMap;
+    for (var i = 0; i < tiles.length; i++) {
+        for (var j = 0; j < tiles[i].length; j++) {
+            tiles[i][j] = 0;
+        }
+    }
 
+    if (mapId == 0) {
+        tiles[12][20] = 1;
+        tiles[5][7] = 1;
+        tiles[6][7] = 1;
+        tiles[10][18] = 2;
+        tiles[14][5] = 1;
+        tiles[15][17] = 1;
+        tiles[2][18] = 2;
+    }
+    else if (mapId == 1) {
+        tiles[5][7] = 1;
+        tiles[5][8] = 1;
+        tiles[5][9] = 1;
+    }
+}
