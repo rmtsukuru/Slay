@@ -156,14 +156,17 @@ function warpTo(mapId, mapX, mapY) {
 }
 
 function drawMinimap(ignoreCamera) {
-    drawRect(744, 0, 280, 406, '#aaa', ignoreCamera);
-    drawRect(746, 2, 276, 402, '#000', ignoreCamera);
+    const width = tiles[0].length * 2 + 2;
+    const height = tiles.length * 2;
+    const baseX = canvasWidth - width;
+    drawRect(baseX - 2, 0, width + 4, height + 4, '#aaa', ignoreCamera);
+    drawRect(baseX, 2, width - 2, height, '#000', ignoreCamera);
     for (var i = 0; i < tiles.length; i++) {
         for (var j = 0; j < tiles[i].length; j++) {
             if (!passableTileValue(tiles[i][j])) {
-                drawRect(746 + j * 2, 2 + i * 2, 2, 2, '#0d0', ignoreCamera);
+                drawRect(baseX + j * 2, 2 + i * 2, 2, 2, '#0d0', ignoreCamera);
             }
         }
     }
-    drawRect(746 + 2 * tileIndex(player.x), 2 + 2 * tileIndex(player.y), 2, 4, '#daf', ignoreCamera);
+    drawRect(baseX + 2 * tileIndex(player.x), 2 + 2 * tileIndex(player.y), 2, 4, '#daf', ignoreCamera);
 }
