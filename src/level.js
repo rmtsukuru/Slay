@@ -148,6 +148,11 @@ function handleEntityCollision(entity) {
     });
 }
 
+function loadMap() {
+    fetchTiles();
+    fetchEntities();
+}
+
 function warpTo(mapId, mapX, mapY) {
     currentMap = mapId;
     loadMap();
