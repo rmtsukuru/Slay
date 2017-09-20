@@ -151,6 +151,7 @@ function handleEntityCollision(entity) {
 function loadMap() {
     fetchTiles();
     fetchEntities();
+    handleMapStartup();
 }
 
 function warpTo(mapId, mapX, mapY) {

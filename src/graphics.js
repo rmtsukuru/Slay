@@ -4,8 +4,8 @@ var cameraY = 0;
 var canvas, graphicsContext;
 var canvasWidth, canvasHeight;
 
-var mapWidth = tiles[0].length * TILE_SIZE;
-var mapHeight = tiles.length * TILE_SIZE;
+var mapWidth = mapTileWidth * TILE_SIZE;
+var mapHeight = mapTileHeight * TILE_SIZE;
 
 var images = {};
 
