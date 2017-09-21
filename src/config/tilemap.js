@@ -1,5 +1,5 @@
-const mapTileWidth = 40;
-const mapTileHeight = 30;
+const mapTileWidth = 32;
+const mapTileHeight = 24;
 
 const TILE_SIZE = 32;
 const STARTING_MAP = 0;
@@ -11,13 +11,13 @@ var mapData = {
         tileWidth: mapTileWidth,
         tileHeight: mapTileHeight,
         tiles: [
-            [12, 20, 1],
-            [5, 7, 1],
-            [6, 7, 1],
-            [10, 18, 2],
-            [14, 5, 1],
-            [15, 17, 1],
-            [2, 18, 2]
+            [20, 12, 1],
+            [7, 5, 1],
+            [7, 6, 1],
+            [18, 10, 2],
+            [5, 14, 1],
+            [17, 15, 1],
+            [18, 2, 2]
         ],
         entities: [
             function() { return new Warp(762, 74, 1, 125, 350); }
@@ -28,11 +28,16 @@ var mapData = {
     },
     1: {
         tileWidth: mapTileWidth,
-        tileHeight: mapTileHeight,
+        tileHeight: mapTileHeight * 2,
         tiles: [
             [5, 7, 1],
             [5, 8, 1],
-            [5, 9, 1]
+            [5, 9, 1],
+            [6, 12, 1],
+            [16, 20, 1],
+            [8, 33, 1],
+            [28, 27, 1],
+            [12, 43, 1]
         ],
         entities: [
             function() { return new Warp(512, 283, 0, 279, 120); }
@@ -43,7 +48,13 @@ var mapData = {
 function fetchTiles(mapId) {
     mapId = mapId || currentMap;
     tileWidth = mapData[mapId].tileWidth || mapTileWidth;
+    if (tileWidth < mapTileWidth) {
+        tileWidth = mapTileWidth;
+    }
     tileHeight = mapData[mapId].tileHeight || mapTileHeight;
+    if (tileHeight < mapTileHeight) {
+        tileHeight = mapTileHeight;
+    }
     tiles = [];
     for (var i = 0; i < tileHeight; i++) {
         var row = [];
@@ -54,8 +65,10 @@ function fetchTiles(mapId) {
     }
 
     mapData[mapId].tiles.forEach(function(data, i) {
-        tiles[data[0]][data[1]] = data[2];
+        tiles[data[1]][data[0]] = data[2];
     });
+    mapWidth = TILE_SIZE * tileWidth;
+    mapHeight = TILE_SIZE * tileHeight;
 }
 
 function fetchEntities(mapId) {
