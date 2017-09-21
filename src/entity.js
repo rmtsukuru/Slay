@@ -1,3 +1,5 @@
+const BASE_GRAVITY = 3;
+
 var entities = [];
 
 function Entity(x, y) {
@@ -12,6 +14,20 @@ function Entity(x, y) {
 
 Entity.prototype.moving = function() {
     return Math.abs(this.xVelocity) > 0 || Math.abs(this.yVelocity) > 0;
+}
+
+Entity.prototype.hasGravity = function() {
+    return false; // For inheritance.
+}
+
+Entity.gravityAmount = function() {
+    return BASE_GRAVITY;
+}
+
+Entity.prototype.handleGravity = function() {
+    if (this.hasGravity()) {
+        this.yVelocity += this.gravityAmount();
+    }
 }
 
 Entity.prototype.update = function() {

@@ -1,4 +1,6 @@
 const PLAYER_SPEED = 5;
+const PLAYER_GRAVITY = 6;
+const PLAYER_HAS_GRAVITY = false;
 const PLAYER_DEBUG_SPEED = 10;
 const PLAYER_SIZE = 32;
 const PLAYER_SPRITE_MULTIPLIER = 0.5;
@@ -49,6 +51,14 @@ Player.prototype.triggerAttack = function() {
     if (this.attackTimer < 0) {
         this.attackTimer = ATTACK_TIMER_FRAMES;
     }
+}
+
+Player.prototype.gravityAmount = function() {
+    return PLAYER_GRAVITY;
+}
+
+Player.prototype.hasGravity = function() {
+    return PLAYER_HAS_GRAVITY;
 }
 
 Player.prototype.update = function() {
@@ -105,6 +115,7 @@ Player.prototype.update = function() {
             }
         }
     }
+    this.handleGravity();
     handleTileCollision(this);
     if (Math.abs(this.xVelocity) > 0 || Math.abs(this.yVelocity) > 0) {
         if (this.frameTimer > 0 ) {
@@ -147,7 +158,7 @@ Player.prototype.draw = function() {
     drawImage(image, this.x, this.y - (PLAYER_SIZE * PLAYER_SPRITE_MULTIPLIER));
 };
 
-Entity.prototype.handleEntityCollision = function(entity) {
+Player.prototype.handleEntityCollision = function(entity) {
     if (entity instanceof Warp) {
         warpTo(entity.destinationMap, entity.destinationX, entity.destinationY);
     }
