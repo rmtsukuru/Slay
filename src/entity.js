@@ -9,6 +9,7 @@ function Entity(x, y) {
     this.yVelocity = 0;
     this.width = TILE_SIZE;
     this.height = TILE_SIZE;
+    this.onGround = false;
     this.color = '#000';
 };
 
@@ -24,9 +25,15 @@ Entity.gravityAmount = function() {
     return BASE_GRAVITY;
 }
 
-Entity.prototype.handleGravity = function() {
+Entity.prototype.handleGravity = function(reverse) {
+    reverse = reverse || false;
     if (this.hasGravity()) {
-        this.yVelocity += this.gravityAmount();
+        if (reverse) {
+            this.yVelocity -= this.gravityAmount();
+        }
+        else {
+            this.yVelocity += this.gravityAmount();
+        }
     }
 }
 

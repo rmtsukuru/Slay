@@ -132,8 +132,12 @@ function getCollisionYVelocity(entity) {
 }
 
 function handleTileCollision(entity) {
+    var startYVelocity = entity.yVelocity;
     entity.xVelocity = getCollisionXVelocity(entity);
     entity.yVelocity = getCollisionYVelocity(entity);
+    if (startYVelocity > 0 && entity.yVelocity == 0) {
+        entity.onGround = true;
+    }
 }
 
 function areColliding(a, b) {

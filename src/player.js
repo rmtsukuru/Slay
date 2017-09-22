@@ -1,6 +1,7 @@
 const PLAYER_SPEED = 5;
+const PLAYER_JUMP_MAX = 0.8 * FPS;
 const PLAYER_GRAVITY = 6;
-const PLAYER_HAS_GRAVITY = false;
+const PLAYER_HAS_GRAVITY = true;
 const PLAYER_DEBUG_SPEED = 10;
 const PLAYER_SIZE = 32;
 const PLAYER_SPRITE_MULTIPLIER = 0.5;
@@ -21,7 +22,8 @@ function Player(x, y) {
     this.width = this.height = PLAYER_SIZE;
     this.color = '#a22';
     this.swordDrawn = false;
-    this.facing = directions.down;
+    this.facing = directions.right;
+    this.jumping = false;
     this.frameTimer = PLAYER_ANIMATION_FRAMES;
     this.animationFrame = 0;
     this.preloadImages();
@@ -90,11 +92,12 @@ Player.prototype.update = function() {
             if (keyState.right || keyState.d) {
                 this.xVelocity += this.speed();
             }
-            if (keyState.up || keyState.w) {
-                this.yVelocity -= this.speed();
+
+            if (keyState.space) {
+                this.jumping = true;
             }
-            if (keyState.down || keyState.s) {
-                this.yVelocity += this.speed();
+            else {
+                this.jumping = false;
             }
 
             if (this.yVelocity == 0) {
@@ -105,17 +108,21 @@ Player.prototype.update = function() {
                     this.facing = directions.right;
                 }
             }
-            else if (this.xVelocity == 0) {
-                if (this.yVelocity < 0) {
-                    this.facing = directions.up;
-                }
-                else if (this.yVelocity > 0) {
-                    this.facing = directions.down;
-                }
-            }
         }
     }
-    this.handleGravity();
+
+    if (this.jumping && this.onGround) {
+        this.onGround = false;
+        this.jumpTimer = PLAYER_JUMP_MAX;
+    }
+    if (this.jumpTimer > 0 && !this.onGround && this.jumping) {
+        this.jumpTimer--;
+        this.handleGravity(true);
+    }
+    else {
+        this.jumpTimer = 0;
+        this.handleGravity();
+    }
     handleTileCollision(this);
     if (Math.abs(this.xVelocity) > 0 || Math.abs(this.yVelocity) > 0) {
         if (this.frameTimer > 0 ) {
