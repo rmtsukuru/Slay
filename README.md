@@ -1,2 +1,2 @@
-# Skeleton JS
-Skeleton code for easily making a 2D HTML5/JS canvas game.
+# Slay
+Simple fantasy Metroidvania-lite platformer with a retro aesthetic.
