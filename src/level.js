@@ -97,14 +97,14 @@ function getUpCollisionVelocity(entity, tempX) {
 }
 
 function getDownCollisionVelocity(entity, tempX) {
-    var minTileY = tileIndex(entity.y + PLAYER_SIZE - 1) + 1;
-    var maxTileY = tileIndex(entity.y + PLAYER_SIZE + entity.yVelocity);
+    var minTileY = tileIndex(entity.y + entity.height - 1) + 1;
+    var maxTileY = tileIndex(entity.y + entity.height + entity.yVelocity);
     var minTileX = tileIndex(tempX);
-    var maxTileX = tileIndex(tempX + PLAYER_SIZE - 1);
+    var maxTileX = tileIndex(tempX + entity.width - 1);
     for (var j = minTileY; j <= maxTileY; j++) {
         for (var i = minTileX; i <= maxTileX; i++) {
             if (!isTilePassable(i, j)) {
-                return Math.min(j * TILE_SIZE - (entity.y + PLAYER_SIZE), entity.yVelocity);
+                return Math.min(j * TILE_SIZE - (entity.y + entity.height), entity.yVelocity);
             }
         }
     }

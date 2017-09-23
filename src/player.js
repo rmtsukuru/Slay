@@ -19,7 +19,8 @@ const directions = {
 
 function Player(x, y) {
     Entity.call(this, x, y);
-    this.width = this.height = PLAYER_SIZE;
+    this.width = PLAYER_SIZE;
+    this.height = PLAYER_SIZE * 1.5;
     this.color = '#a22';
     this.swordDrawn = false;
     this.facing = directions.right;
@@ -163,7 +164,7 @@ Player.prototype.draw = function() {
     else {
         image = 'player0' + this.animationFrame + '.png';
     }
-    drawImage(image, this.x, this.y - (PLAYER_SIZE * PLAYER_SPRITE_MULTIPLIER));
+    drawImage(image, this.x, this.y);
 };
 
 Player.prototype.handleEntityCollision = function(entity) {
