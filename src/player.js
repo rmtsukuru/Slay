@@ -1,6 +1,6 @@
 const PLAYER_SPEED = 5;
-const PLAYER_JUMP_MAX = 0.8 * FPS;
-const PLAYER_GRAVITY = 6;
+const PLAYER_JUMP_MAX = 0.4 * FPS;
+const PLAYER_GRAVITY = 4;
 const PLAYER_HAS_GRAVITY = true;
 const PLAYER_DEBUG_SPEED = 10;
 const PLAYER_SIZE = 32;
@@ -93,10 +93,10 @@ Player.prototype.update = function() {
                 this.xVelocity += this.speed();
             }
 
-            if (keyState.space) {
+            if (triggerKeyState.space) {
                 this.jumping = true;
             }
-            else {
+            else if (!keyState.space) {
                 this.jumping = false;
             }
 
@@ -121,6 +121,7 @@ Player.prototype.update = function() {
     }
     else {
         this.jumpTimer = 0;
+        this.jumping = false;
         this.handleGravity();
     }
     handleTileCollision(this);

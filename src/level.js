@@ -138,6 +138,9 @@ function handleTileCollision(entity) {
     if (startYVelocity > 0 && entity.yVelocity == 0) {
         entity.onGround = true;
     }
+    else if (startYVelocity < 0 && entity.yVelocity == 0) {
+        entity.jumping = false;
+    }
 }
 
 function areColliding(a, b) {

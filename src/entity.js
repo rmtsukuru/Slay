@@ -17,6 +17,10 @@ Entity.prototype.moving = function() {
     return Math.abs(this.xVelocity) > 0 || Math.abs(this.yVelocity) > 0;
 }
 
+Entity.prototype.speed = function() {
+    return 0; // For inheritance.
+}
+
 Entity.prototype.hasGravity = function() {
     return false; // For inheritance.
 }
@@ -27,9 +31,9 @@ Entity.gravityAmount = function() {
 
 Entity.prototype.handleGravity = function(reverse) {
     reverse = reverse || false;
-    if (this.hasGravity()) {
+    if (this.hasGravity() && Math.abs(this.yVelocity) < this.speed()) {
         if (reverse) {
-            this.yVelocity -= this.gravityAmount();
+            this.yVelocity -= this.gravityAmount() * 2;
         }
         else {
             this.yVelocity += this.gravityAmount();
