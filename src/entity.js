@@ -1,4 +1,5 @@
 const BASE_GRAVITY = 3;
+const JUMP_MULTIPLIER = 2;
 
 var entities = [];
 
@@ -33,7 +34,7 @@ Entity.prototype.handleGravity = function(reverse) {
     reverse = reverse || false;
     if (this.hasGravity() && Math.abs(this.yVelocity) < this.speed()) {
         if (reverse) {
-            this.yVelocity -= this.gravityAmount() * 2.15;
+            this.yVelocity -= this.gravityAmount() * JUMP_MULTIPLIER;
         }
         else {
             this.yVelocity += this.gravityAmount();
