@@ -55,7 +55,7 @@ function getLeftCollisionVelocity(entity) {
     var minTileX = tileIndex(entity.x + entity.xVelocity);
     var maxTileX = tileIndex(entity.x + 1) - 1;
     var minTileY = tileIndex(entity.y);
-    var maxTileY = tileIndex(entity.y + PLAYER_SIZE - 1);
+    var maxTileY = tileIndex(entity.y + entity.height - 1);
     for (var i = maxTileX; i >= minTileX; i--) {
         for (var j = minTileY; j <= maxTileY; j++) {
             if (!isTilePassable(i, j)) {
@@ -67,14 +67,14 @@ function getLeftCollisionVelocity(entity) {
 }
 
 function getRightCollisionVelocity(entity) {
-    var minTileX = tileIndex(entity.x + PLAYER_SIZE - 1) + 1;
-    var maxTileX = tileIndex(entity.x + PLAYER_SIZE + entity.xVelocity);
+    var minTileX = tileIndex(entity.x + entity.width - 1) + 1;
+    var maxTileX = tileIndex(entity.x + entity.width + entity.xVelocity);
     var minTileY = tileIndex(entity.y);
-    var maxTileY = tileIndex(entity.y + PLAYER_SIZE - 1);
+    var maxTileY = tileIndex(entity.y + entity.height - 1);
     for (var i = minTileX; i <= maxTileX; i++) {
         for (var j = minTileY; j <= maxTileY; j++) {
             if (!isTilePassable(i, j)) {
-                return Math.min(i * TILE_SIZE - (entity.x + PLAYER_SIZE), entity.xVelocity);
+                return Math.min(i * TILE_SIZE - (entity.x + entity.width), entity.xVelocity);
             }
         }
     }
@@ -85,7 +85,7 @@ function getUpCollisionVelocity(entity, tempX) {
     var minTileY = tileIndex(entity.y + entity.yVelocity);
     var maxTileY = tileIndex(entity.y) - 1;
     var minTileX = tileIndex(tempX);
-    var maxTileX = tileIndex(tempX + PLAYER_SIZE - 1);
+    var maxTileX = tileIndex(tempX + entity.width - 1);
     for (var j = maxTileY; j >= minTileY; j--) {
         for (var i = minTileX; i <= maxTileX; i++) {
             if (!isTilePassable(i, j)) {
