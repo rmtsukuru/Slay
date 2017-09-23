@@ -33,7 +33,7 @@ Entity.prototype.handleGravity = function(reverse) {
     reverse = reverse || false;
     if (this.hasGravity() && Math.abs(this.yVelocity) < this.speed()) {
         if (reverse) {
-            this.yVelocity -= this.gravityAmount() * 2;
+            this.yVelocity -= this.gravityAmount() * 2.15;
         }
         else {
             this.yVelocity += this.gravityAmount();
