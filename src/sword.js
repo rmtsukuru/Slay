@@ -27,6 +27,7 @@ function Sword(x, y, horizontal) {
 Sword.prototype = Object.create(Entity.prototype);
 
 Sword.prototype.update = function() {
+    this.y = player.y + 12;
     if (this.active) {
         if (this.lifeTimer <= 0) {
             player.swordDrawn = false;
