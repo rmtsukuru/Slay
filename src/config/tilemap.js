@@ -11,33 +11,17 @@ var mapData = {
         tileWidth: mapTileWidth,
         tileHeight: mapTileHeight,
         tiles: [
-            [20, 12, 1],
-            [5, 5, 1],
-            [5, 6, 1],
-            [12, 4, 1],
-            [12, 5, 1],
-            [12, 6, 1],
-            [18, 10, 2],
-            [5, 14, 1],
-            [6, 14, 1],
-            [16, 15, 1],
-            [17, 15, 1],
-            [18, 2, 2],
-            [7, 9, 1],
-            [8, 9, 1],
-            [9, 9, 1],
-            [10, 9, 1],
-            [8, 18, 1],
-            [9, 18, 1],
-            [10, 19, 1],
-            [11, 19, 1],
-            [10, 20, 1],
-            [11, 21, 1],
-            [10, 22, 1],
-            [11, 23, 1]
+            [0, 19, 0],
+            [1, 19, 0],
+            [0, 20, 0],
+            [1, 20, 0],
+            [0, 21, 0],
+            [1, 21, 0],
         ],
         entities: [
-            function() { return new Warp(762, 74, 1, 125, 350); }
+            function() { return new Warp(-32, 608, 1, 125, 350); },
+            function() { return new Warp(-32, 640, 1, 125, 350); },
+            function() { return new Warp(-32, 672, 1, 125, 350); },
         ],
         onStartup: function() {
             console.log('Level 0 loaded');
@@ -80,6 +64,21 @@ function fetchTiles(mapId) {
         }
         tiles.push(row);
     }
+
+    
+
+    var baseTiles = [
+    ];
+    for (var i = 0; i < tileWidth; i++) {
+        for (var j = 0; j < tileHeight; j++) {
+            if (i < 2 || i > tileWidth - 3 || j < 2 || j > tileHeight - 3) {
+                baseTiles.push([i, j, 1]);
+            }
+        }
+    }
+    baseTiles.forEach(function(data, i) {
+        tiles[data[1]][data[0]] = data[2];
+    });
 
     mapData[mapId].tiles.forEach(function(data, i) {
         tiles[data[1]][data[0]] = data[2];
