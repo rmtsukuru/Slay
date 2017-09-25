@@ -15,8 +15,15 @@ function update() {
 }
 
 function drawHud() {
-    drawText('X: ' + player.x + ' Y: ' + player.y, 2, 20, 'Cambria', '24px', '#2f2', true);
-    drawText('Tile X: ' + tileIndex(player.x) + ' Tile Y: ' + tileIndex(player.y), 2, 48, 'Cambria', '24px', '#f2f', true);
+    drawRect(0, 0, 200, 20, '#000', true);
+    drawRect(1, 1, 198, 18, '#fff', true);
+    drawRect(3, 3, 194, 14, '#000', true);
+    drawRect(3, 3, 180, 14, '#22e374', true);
+}
+
+function drawDebugHud() {
+    drawText('X: ' + player.x + ' Y: ' + player.y, 802, 20, 'Cambria', '24px', '#2f2', true);
+    drawText('Tile X: ' + tileIndex(player.x) + ' Tile Y: ' + tileIndex(player.y), 802, 48, 'Cambria', '24px', '#f2f', true);
     if (minimapEnabled) {
         drawMinimap(true);
     }
@@ -29,7 +36,8 @@ function draw() {
         entity.draw();
     });
     drawForegroundTiles();
+    drawHud();
     if (DEBUG_DISPLAY) {
-        drawHud();
+        drawDebugHud();
     }
 }
