@@ -17,11 +17,16 @@ var mapData = {
             [1, 20, 0],
             [0, 21, 0],
             [1, 21, 0],
+            [2, 18, 1],
+            [3, 18, 1],
+            [28, 17, 1],
+            [29, 17, 1],
         ],
         entities: [
             function() { return new Warp(-32, 608, 1, 125, 350); },
             function() { return new Warp(-32, 640, 1, 125, 350); },
             function() { return new Warp(-32, 672, 1, 125, 350); },
+            function() { return new Enemy(500, 200); },
         ],
         onStartup: function() {
             console.log('Level 0 loaded');
