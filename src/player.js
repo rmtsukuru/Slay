@@ -6,10 +6,11 @@ const PLAYER_DEBUG_SPEED = 10;
 const PLAYER_SIZE = 20;
 const PLAYER_HEIGHT = 60;
 const PLAYER_SPRITE_MULTIPLIER = 0.5;
-const PLAYER_ANIMATION_FRAMES = 10;
-const PLAYER_FRAME_COUNT = 3;
-const MOVEMENT_TIMER_FRAMES = 2 * FPS;
-const ATTACK_TIMER_FRAMES = 1 * FPS;
+
+const PLAYER_ANIMATIONS = {
+    stand: { frames: 1, timerFrames: 0 },
+    run: { frames: 8, timerFrames: 10 },
+};
 
 const directions = {
     left: 0,
@@ -27,21 +28,15 @@ function Player(x, y) {
     this.facing = directions.right;
     this.jumping = false;
     this.moving = false;
-    this.frameTimer = PLAYER_ANIMATION_FRAMES;
+    this.frameTimer = 0;
     this.animationFrame = 0;
     this.preloadImages();
-    this.movementTimer = MOVEMENT_TIMER_FRAMES;
 }
 
 Player.prototype = Object.create(Entity.prototype);
 
 Player.prototype.preloadImages = function() {
-    for (var i = 0; i < PLAYER_FRAME_COUNT; i++) {
-        loadImage('player0' + i + '.png');
-        loadImage('player1' + i + '.png');
-        loadImage('player2' + i + '.png');
-        loadImage('player3' + i + '.png');
-    }
+    // TODO fix this properly
 }
 
 Player.prototype.speed = function() {
@@ -121,22 +116,24 @@ Player.prototype.update = function() {
         this.handleGravity();
     }
     handleTileCollision(this);
-    if (Math.abs(this.xVelocity) > 0 || Math.abs(this.yVelocity) > 0) {
-        if (this.frameTimer > 0 ) {
+    if (Math.abs(this.xVelocity) > 0) {
+        if (!this.moving) {
+            this.animationFrame = 0;
+            this.moving = true;
+        }
+        else if (this.frameTimer > 0 ) {
             this.frameTimer--;
         }
         else {
-            this.frameTimer = PLAYER_ANIMATION_FRAMES;
+            this.frameTimer = PLAYER_ANIMATIONS[this.animation()].timerFrames;
             this.animationFrame++;
-            this.animationFrame %= PLAYER_FRAME_COUNT;
-        }
-        if (this.movementTimer > 0) {
-            this.movementTimer--;
+            this.animationFrame %= PLAYER_ANIMATIONS[this.animation()].frames;
         }
     }
     else {
-        this.frameTimer = PLAYER_ANIMATION_FRAMES;
+        this.frameTimer = PLAYER_ANIMATIONS.stand.timerFrames;
         this.animationFrame = 0;
+        this.moving = false;
     }
     handleEntityCollision(this);
     Entity.prototype.update.call(this);
