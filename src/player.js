@@ -3,7 +3,8 @@ const PLAYER_JUMP_MAX = 0.3 * FPS;
 const PLAYER_GRAVITY = 5;
 const PLAYER_HAS_GRAVITY = true;
 const PLAYER_DEBUG_SPEED = 10;
-const PLAYER_SIZE = 32;
+const PLAYER_SIZE = 20;
+const PLAYER_HEIGHT = 60;
 const PLAYER_SPRITE_MULTIPLIER = 0.5;
 const PLAYER_ANIMATION_FRAMES = 10;
 const PLAYER_FRAME_COUNT = 3;
@@ -20,11 +21,12 @@ const directions = {
 function Player(x, y) {
     Entity.call(this, x, y);
     this.width = PLAYER_SIZE;
-    this.height = PLAYER_SIZE * 1.5;
+    this.height = PLAYER_HEIGHT;
     this.color = '#a22';
     this.swordDrawn = false;
     this.facing = directions.right;
     this.jumping = false;
+    this.moving = false;
     this.frameTimer = PLAYER_ANIMATION_FRAMES;
     this.animationFrame = 0;
     this.preloadImages();
@@ -140,19 +142,28 @@ Player.prototype.update = function() {
     Entity.prototype.update.call(this);
 };
 
+Player.prototype.animation = function() {
+    if (this.jumping) {
+        return 'jump';
+    }
+    else if (this.moving) {
+        return 'run';
+    }
+    else if (this.swordDrawn) {
+        return 'slash';
+    }
+    else {
+        return 'stand';
+    }
+};
+
 Player.prototype.draw = function() {
     var image;
     if (this.facing == directions.left) {
-        image = 'player1' + this.animationFrame + '.png';
-    }
-    else if (this.facing == directions.up) {
-        image = 'player2' + this.animationFrame + '.png';
+        image = 'player-' + this.animation() + '-left' + this.animationFrame + '.png';
     }
     else if (this.facing == directions.right) {
-        image = 'player3' + this.animationFrame + '.png';
-    }
-    else {
-        image = 'player0' + this.animationFrame + '.png';
+        image = 'player-' + this.animation() + '-right' + this.animationFrame + '.png';
     }
     drawImage(image, this.x, this.y);
 };

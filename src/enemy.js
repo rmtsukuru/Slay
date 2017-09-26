@@ -2,7 +2,7 @@ const FLASH_TIMER_FRAMES = 0.09 * FPS;
 
 function Enemy(x, y) {
     Entity.call(this, x, y);
-    this.width = this.height = PLAYER_SIZE;
+    this.width = this.height = TILE_SIZE;
     this.health = 30;
 }
 
