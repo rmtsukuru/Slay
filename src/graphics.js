@@ -61,11 +61,12 @@ function drawTiledImage(filename, x, y, ignoreCamera, sourceX, sourceY, sourceWi
         else {
             graphicsContext.drawImage(image, sourceX, sourceY, sourceWidth, sourceHeight, x - cameraX, y - cameraY, width, height);
         }
+        graphicsContext.filter = 'none';
     }
 }
 
-function drawImage(filename, x, y, ignoreCamera) {
-    drawTiledImage(filename, x, y, ignoreCamera, 0, 0);
+function drawImage(filename, x, y, ignoreCamera, filter) {
+    drawTiledImage(filename, x, y, ignoreCamera, 0, 0, null, null, null, null, filter);
 }
 
 function drawRect(x, y, width, height, color, ignoreCamera) {
