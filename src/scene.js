@@ -95,8 +95,8 @@ TitleScene.prototype.update = function() {
 
 TitleScene.prototype.draw = function() {
     drawRect(0, 0, canvasWidth, canvasHeight, '#000', true);
-    drawText('INSERT TITLE HERE', canvasWidth / 2 - 480, canvasHeight / 2 - 40, 'VT323', '140px', '#fff', true);
-    drawText('Replace this crap', canvasWidth / 2 - 105, canvasHeight / 2 + 50, 'VT323', '22px', '#fee', true);
+    drawText('SLAY', canvasWidth / 2 - 130, canvasHeight / 2 - 40, 'VT323', '140px', '#fff', true);
+    drawText('Press Any Key To Start', canvasWidth / 2 - 115, canvasHeight / 2 + 50, 'VT323', '22px', '#fee', true);
 }
 
 function CreditScene() {
