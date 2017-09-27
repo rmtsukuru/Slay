@@ -36,7 +36,12 @@ function Player(x, y) {
 Player.prototype = Object.create(Entity.prototype);
 
 Player.prototype.preloadImages = function() {
-    // TODO fix this properly
+    _.keys(PLAYER_ANIMATIONS).forEach(function(animation) {
+        for (var i = 0; i < PLAYER_ANIMATIONS[animation].frames; i++) {
+            loadImage('player-' + animation + '-left' + i + '.png');
+            loadImage('player-' + animation + '-right' + i + '.png');
+        }
+    });
 }
 
 Player.prototype.speed = function() {
