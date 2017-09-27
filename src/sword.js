@@ -17,7 +17,8 @@ function Sword(x, y, horizontal) {
         this.width = SWORD_WIDTH;
         this.height = SWORD_LENGTH;
     }
-    this.color = '#f33'; 
+    this.color = '#f33';
+    this.invisible = true;
     this.active = false;
     this.activationTimer = SWORD_TIMER_FRAMES;
     this.lifeTimer = SWORD_TTL_FRAMES;
@@ -27,7 +28,7 @@ function Sword(x, y, horizontal) {
 Sword.prototype = Object.create(Entity.prototype);
 
 Sword.prototype.update = function() {
-    this.y = player.y + 12;
+    this.y = player.y + 30;
     if (this.active) {
         if (this.lifeTimer <= 0) {
             player.swordDrawn = false;
@@ -46,31 +47,6 @@ Sword.prototype.update = function() {
         }
     }
     Entity.prototype.update.call(this);
-};
-
-Sword.prototype.draw = function() {
-    var image;
-    if (!this.active) {
-        image = 'sword' + player.facing + '0.png';
-    }
-    else if (this.lifeTimer > SWORD_ANIMATION_CUTOFF) {
-        image = 'sword' + player.facing + '1.png';
-    }
-    else {
-        image = 'sword' + player.facing + '2.png';
-    }
-    if (player.facing == directions.left) {
-        drawImage(image, this.x, this.y - 42);
-    }
-    else if (player.facing == directions.right) {
-        drawImage(image, this.x - 32, this.y - 42);
-    }
-    else if (player.facing == directions.up) {
-        drawImage(image, this.x - 10, this.y);
-    }
-    else {
-        drawImage(image, this.x - 10, this.y - 32);
-    }
 };
 
 Sword.prototype.damage = function(entity) {

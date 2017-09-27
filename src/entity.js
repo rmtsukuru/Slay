@@ -48,7 +48,9 @@ Entity.prototype.update = function() {
 }
 
 Entity.prototype.draw = function() {
-    drawRect(this.x, this.y, this.width, this.height, this.color);
+    if (!this.invisible) {
+        drawRect(this.x, this.y, this.width, this.height, this.color);
+    }
 }
 
 Entity.prototype.handleEntityCollision = function(entity) {
