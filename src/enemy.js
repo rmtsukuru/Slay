@@ -1,10 +1,11 @@
 const FLASH_TIMER_FRAMES = 0.09 * FPS;
 
-function Enemy(x, y) {
+function Enemy(x, y, facingRight) {
     Entity.call(this, x, y);
     this.width = 30;
     this.height = 50;
     this.health = 30;
+    this.facingRight = facingRight || false;
     loadImage('enemy-stand.png');
 }
 
@@ -39,5 +40,10 @@ Enemy.prototype.handleEntityCollision = function(entity) {
 };
 
 Enemy.prototype.draw = function() {
-    drawImage('enemy-stand.png', this.x, this.y - 12, false, this.filter);
+    if (this.facingRight) {
+        drawImage('enemy-stand-right.png', this.x, this.y - 12, false, this.filter);
+    }
+    else {
+        drawImage('enemy-stand-left.png', this.x, this.y - 12, false, this.filter);
+    }
 };
