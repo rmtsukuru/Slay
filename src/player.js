@@ -10,6 +10,7 @@ const PLAYER_SPRITE_MULTIPLIER = 0.5;
 const PLAYER_ANIMATIONS = {
     stand: { frames: 1, timerFrames: 0 },
     run: { frames: 8, timerFrames: 10 },
+    jump: { frames: 1, timerFrames: 0 },
 };
 
 const directions = {
@@ -91,6 +92,7 @@ Player.prototype.update = function() {
 
             if (triggerKeyState.space) {
                 this.jumping = true;
+                this.animationFrame = 0;
             }
             else if (!keyState.space) {
                 this.jumping = false;
