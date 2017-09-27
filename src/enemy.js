@@ -1,4 +1,4 @@
-const FLASH_TIMER_FRAMES = 0.09 * FPS;
+const FLASH_TIMER_FRAMES = 0.05 * FPS;
 
 function Enemy(x, y, facingRight) {
     Entity.call(this, x, y);
