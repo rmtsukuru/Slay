@@ -1,4 +1,6 @@
 const FLASH_TIMER_FRAMES = 0.05 * FPS;
+const STRAFE_TIMER_FRAMES = 1.8 * FPS;
+const ENEMY_SPEED = 3;
 
 function Enemy(x, y, facingRight) {
     Entity.call(this, x, y);
@@ -6,13 +8,17 @@ function Enemy(x, y, facingRight) {
     this.height = 50;
     this.health = 30;
     this.facingRight = facingRight || false;
+    this.strafeTimer = STRAFE_TIMER_FRAMES;
     loadImage('enemy-stand.png');
 }
 
 Enemy.prototype = Object.create(Entity.prototype);
 
 Enemy.prototype.update = function() {
-    this.xVelocity = 0;
+    this.xVelocity = ENEMY_SPEED;
+    if (!this.facingRight) {
+        this.xVelocity *= -1;
+    }
     this.yVelocity = 0;
     this.handleGravity();
     handleTileCollision(this);
@@ -24,6 +30,13 @@ Enemy.prototype.update = function() {
     else{
         this.color = '#33b';
         this.filter = null;
+    }
+    if (this.strafeTimer > 0) {
+        this.strafeTimer--;
+    }
+    else {
+        this.strafeTimer = STRAFE_TIMER_FRAMES;
+        this.facingRight = !this.facingRight;
     }
     handleEntityCollision(this);
     Entity.prototype.update.call(this);

@@ -26,7 +26,7 @@ var mapData = {
             function() { return new Warp(-32, 608, 1, 125, 350); },
             function() { return new Warp(-32, 640, 1, 125, 350); },
             function() { return new Warp(-32, 672, 1, 125, 350); },
-            function() { return new Enemy(500, 200, true); },
+            function() { return new Enemy(700, 400, false); },
         ],
         onStartup: function() {
             console.log('Level 0 loaded');
