@@ -8,9 +8,9 @@ const PLAYER_HEIGHT = 60;
 const PLAYER_SPRITE_MULTIPLIER = 0.5;
 
 const PLAYER_ANIMATIONS = {
-    stand: { frames: 1, timerFrames: 0 },
-    run: { frames: 8, timerFrames: 10 },
-    jump: { frames: 1, timerFrames: 0 },
+    stand: { frames: 1, timerFrames: 1 },
+    run: { frames: 8, timerFrames: 10, loop: true },
+    jump: { frames: 1, timerFrames: 1 },
 };
 
 const directions = {
@@ -134,7 +134,12 @@ Player.prototype.update = function() {
         else {
             this.frameTimer = PLAYER_ANIMATIONS[this.animation()].timerFrames;
             this.animationFrame++;
-            this.animationFrame %= PLAYER_ANIMATIONS[this.animation()].frames;
+            if (PLAYER_ANIMATIONS[this.animation()].loop) {
+                this.animationFrame %= PLAYER_ANIMATIONS[this.animation()].frames;
+            }
+            else {
+                this.animationFrame = Math.min(this.animationFrame, PLAYER_ANIMATIONS[this.animation()].frames - 1);
+            }
         }
     }
     else {
