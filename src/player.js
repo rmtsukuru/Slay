@@ -6,7 +6,7 @@ const PLAYER_DEBUG_SPEED = 10;
 const PLAYER_SIZE = 20;
 const PLAYER_HEIGHT = 60;
 const PLAYER_SPRITE_MULTIPLIER = 0.5;
-const PLAYER_FLINCH_SPEED = 4;
+const PLAYER_FLINCH_SPEED = 8;
 const PLAYER_FLINCH_FRAMES = 0.3 * FPS;
 const PLAYER_HP_MAX = 100;
 
@@ -15,6 +15,7 @@ const PLAYER_ANIMATIONS = {
     run: { frames: 8, timerFrames: 10, loop: true },
     jump: { frames: 1, timerFrames: 1 },
     flinch: { frames: 1, timerFrames: 1, filename: "jump" },
+    slash: { frames: 3, timerFrames: 10 },
 };
 
 const directions = {
@@ -221,10 +222,13 @@ Player.prototype.handleEntityCollision = function(entity) {
         this.flinching = true;
         if (entity.x > this.x) {
             this.xVelocity = -1 * PLAYER_FLINCH_SPEED;
+            this.facing = directions.right;
         }
         else {
             this.xVelocity = PLAYER_FLINCH_SPEED;
+            this.facing = directions.left;
         }
+        this.yVelocity = -2 * PLAYER_FLINCH_SPEED;
         this.flinchTimer = PLAYER_FLINCH_FRAMES;
     }
 }
