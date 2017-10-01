@@ -18,7 +18,7 @@ function drawHud() {
     drawRect(0, 0, 200, 20, '#000', true);
     drawRect(1, 1, 198, 18, '#fff', true);
     drawRect(3, 3, 194, 14, '#000', true);
-    drawRect(3, 3, 180, 14, '#22e374', true);
+    drawRect(3, 3, 194 * player.health / player.maxHP, 14, '#22e374', true);
 }
 
 function drawDebugHud() {

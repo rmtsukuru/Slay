@@ -23,6 +23,7 @@ function Sword(x, y, horizontal) {
     this.activationTimer = SWORD_TIMER_FRAMES;
     this.lifeTimer = SWORD_TTL_FRAMES;
     this.damagedTargets = [];
+    this.friendly = true;
 }
 
 Sword.prototype = Object.create(Entity.prototype);

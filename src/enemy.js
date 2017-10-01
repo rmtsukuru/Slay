@@ -1,6 +1,7 @@
 const FLASH_TIMER_FRAMES = 0.05 * FPS;
 const STRAFE_TIMER_FRAMES = 1.8 * FPS;
 const ENEMY_SPEED = 3;
+const ENEMY_DAMAGE = 10;
 
 function Enemy(x, y, facingRight) {
     Entity.call(this, x, y);
@@ -51,6 +52,10 @@ Enemy.prototype.handleEntityCollision = function(entity) {
         }
     }
 };
+
+Enemy.prototype.damage = function(entity) {
+    return ENEMY_DAMAGE;
+}
 
 Enemy.prototype.draw = function() {
     if (this.facingRight) {
