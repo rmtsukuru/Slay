@@ -220,6 +220,7 @@ Player.prototype.handleEntityCollision = function(entity) {
     else if (entity.damage() > 0 && !entity.friendly && !this.flinching) {
         this.health -= entity.damage();
         this.flinching = true;
+        hudHPDelayed = true;
         if (entity.x > this.x) {
             this.xVelocity = -1 * PLAYER_FLINCH_SPEED;
             this.facing = directions.right;

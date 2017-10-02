@@ -1,3 +1,9 @@
+const HEALTH_BAR_DELAY_FRAMES = 0.8 * FPS;
+const HEALTH_BAR_DECAY_FRAMES = 0.02 * FPS;
+const HEALTH_BAR_DECAY_RATE = 1;
+
+var hudHP, hudHPTimer, hudHPDelayed;
+
 function configureGame() {
     currentMap = STARTING_MAP;
     loadMap();
@@ -15,9 +21,24 @@ function update() {
 }
 
 function drawHud() {
+    hudHP = hudHP || player.health;
+    if (hudHP > player.health) {
+        if (hudHPTimer > 0) {
+            hudHPTimer--;
+        }
+        else if (hudHPDelayed) {
+            hudHPTimer = HEALTH_BAR_DELAY_FRAMES;
+            hudHPDelayed = false;
+        }
+        else {
+            hudHPTimer = HEALTH_BAR_DECAY_FRAMES;
+            hudHP = Math.max(hudHP - HEALTH_BAR_DECAY_RATE, player.health);
+        }
+    }
     drawRect(0, 0, 200, 20, '#000', true);
     drawRect(1, 1, 198, 18, '#fff', true);
     drawRect(3, 3, 194, 14, '#000', true);
+    drawRect(3, 3, Math.max(0, 194 * hudHP / player.maxHP), 14, '#f00', true);
     drawRect(3, 3, Math.max(0, 194 * player.health / player.maxHP), 14, '#22e374', true);
 }
 
