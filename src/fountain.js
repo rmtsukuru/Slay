@@ -1,4 +1,4 @@
-function Fountain(x, y, destinationMap, destinationX, destinationY) {
+function Fountain(x, y) {
     Entity.call(this, x, y);
     this.color = '#0de';
     this.width = this.height = TILE_SIZE * 3;
