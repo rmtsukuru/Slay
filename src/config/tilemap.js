@@ -23,9 +23,9 @@ var mapData = {
             [29, 17, 1],
         ],
         entities: [
-            function() { return new Warp(-32, 608, 1, 125, 350); },
-            function() { return new Warp(-32, 640, 1, 125, 350); },
-            function() { return new Warp(-32, 672, 1, 125, 350); },
+            function() { return new Warp(-32, 608, 2, 950, 640); },
+            function() { return new Warp(-32, 640, 2, 950, 640); },
+            function() { return new Warp(-32, 672, 2, 950, 640); },
             function() { return new Enemy(700, 400, false); },
         ],
         onStartup: function() {
@@ -48,7 +48,25 @@ var mapData = {
         entities: [
             function() { return new Warp(512, 283, 0, 279, 120); }
         ]
-    }
+    },
+    2: {
+        tileWidth: mapTileWidth,
+        tileHeight: mapTileHeight,
+        tiles: [
+            [30, 19, 0],
+            [31, 19, 0],
+            [30, 20, 0],
+            [31, 20, 0],
+            [30, 21, 0],
+            [31, 21, 0],
+        ],
+        entities: [
+            function() { return new Fountain(450, 608); },
+            function() { return new Warp(1024, 608, 0, 50, 640); },
+            function() { return new Warp(1024, 640, 0, 50, 640); },
+            function() { return new Warp(1024, 672, 0, 50, 640); },
+        ]
+    },
 };
 
 function fetchTiles(mapId) {

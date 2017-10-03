@@ -9,6 +9,7 @@ const PLAYER_SPRITE_MULTIPLIER = 0.5;
 const PLAYER_FLINCH_SPEED = 8;
 const PLAYER_FLINCH_FRAMES = 0.3 * FPS;
 const PLAYER_HP_MAX = 100;
+const PLAYER_HEAL_RATE = 100 / FPS;
 
 const PLAYER_ANIMATIONS = {
     stand: { frames: 1, timerFrames: 1 },
@@ -40,6 +41,7 @@ function Player(x, y) {
     this.maxHP = PLAYER_HP_MAX;
     this.health = this.maxHP;
     this.flinchTimer = 0;
+    this.healing = false;
 }
 
 Player.prototype = Object.create(Entity.prototype);
@@ -73,6 +75,7 @@ Player.prototype.hasGravity = function() {
 }
 
 Player.prototype.update = function() {
+    this.healing = false;
     if (this.flinching) {
         if (this.flinchTimer > 0) {
             this.flinchTimer--;
@@ -171,6 +174,9 @@ Player.prototype.update = function() {
         this.moving = false;
     }
     handleEntityCollision(this);
+    if (this.healing) {
+        this.health = Math.min(this.health + PLAYER_HEAL_RATE, this.maxHP);
+    }
     Entity.prototype.update.call(this);
 };
 
@@ -216,6 +222,9 @@ Player.prototype.draw = function() {
 Player.prototype.handleEntityCollision = function(entity) {
     if (entity instanceof Warp) {
         warpTo(entity.destinationMap, entity.destinationX, entity.destinationY);
+    }
+    else if (entity instanceof Fountain) {
+        this.healing = true;
     }
     else if (entity.damage() > 0 && !entity.friendly && !this.flinching) {
         this.health -= entity.damage();
