@@ -35,11 +35,14 @@ function drawHud() {
             hudHP = Math.max(hudHP - HEALTH_BAR_DECAY_RATE, player.health);
         }
     }
-    drawRect(0, 0, 200, 20, '#000', true);
-    drawRect(1, 1, 198, 18, '#fff', true);
-    drawRect(3, 3, 194, 14, '#000', true);
-    drawRect(3, 3, Math.max(0, 194 * hudHP / player.maxHP), 14, '#f00', true);
-    drawRect(3, 3, Math.max(0, 194 * player.health / player.maxHP), 14, '#22e374', true);
+    else {
+        hudHP = player.health;
+    }
+    drawRect(0, 0, player.maxHP * 194 / 100 + 6, 20, '#000', true);
+    drawRect(1, 1, player.maxHP * 194 / 100 + 4, 18, '#fff', true);
+    drawRect(3, 3, player.maxHP * 194 / 100, 14, '#000', true);
+    drawRect(3, 3, Math.max(0, hudHP * 194 / 100), 14, '#f00', true);
+    drawRect(3, 3, Math.max(0, player.health * 194 / 100), 14, '#22e374', true);
 }
 
 function drawDebugHud() {
