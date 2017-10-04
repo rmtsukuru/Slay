@@ -4,6 +4,8 @@ const HEALTH_BAR_DECAY_RATE = 1;
 
 var hudHP, hudHPTimer, hudHPDelayed;
 
+var upgradesCollected = [];
+
 function configureGame() {
     currentMap = STARTING_MAP;
     loadMap();

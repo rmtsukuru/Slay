@@ -1,9 +1,10 @@
 const HEALTH_UPGRADE_AMOUNT = 50;
 const HEALTH_UPGRADE_COLOR = '#22e374';
 
-function Upgrade(x, y, amount) {
+function Upgrade(x, y, id, amount) {
     Entity.call(this, x, y);
     this.amount = amount || HEALTH_UPGRADE_AMOUNT;
+    this.id = id || 0;
     this.color = HEALTH_UPGRADE_COLOR;
     this.width = this.height = TILE_SIZE;
 }
@@ -11,6 +12,10 @@ function Upgrade(x, y, amount) {
 Upgrade.prototype = Object.create(Entity.prototype);
 
 Upgrade.prototype.update = function() {
+    if (upgradesCollected.includes(this.id)) {
+        this.remove();
+    }
+
     Entity.prototype.update.call(this);
     handleEntityCollision(this);
 }
@@ -23,6 +28,7 @@ Upgrade.prototype.handleEntityCollision = function(entity) {
     if (entity instanceof Player) {
         entity.maxHP += this.amount;
         entity.health += this.amount;
+        upgradesCollected.push(this.id);
         this.remove();
     }
 }
