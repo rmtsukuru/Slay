@@ -16,7 +16,7 @@ const PLAYER_ANIMATIONS = {
     run: { frames: 8, timerFrames: 10, loop: true },
     jump: { frames: 1, timerFrames: 1 },
     flinch: { frames: 1, timerFrames: 1, filename: "jump" },
-    slash: { frames: 3, timerFrames: 10 },
+    slash: { frames: 3, timerFrames: 6, xOffset: -43, yOffset: -10 },
 };
 
 const directions = {
@@ -106,6 +106,7 @@ Player.prototype.update = function() {
                 entities.unshift(sword);
                 playSound('slice2', 0.3);
                 this.swordDrawn = true;
+                this.animationFrame = 0;
             }
             else {
                 if (keyState.left || keyState.a) {
@@ -154,24 +155,25 @@ Player.prototype.update = function() {
             this.animationFrame = 0;
             this.moving = true;
         }
-        else if (this.frameTimer > 0 ) {
-            this.frameTimer--;
-        }
-        else {
-            this.frameTimer = PLAYER_ANIMATIONS[this.animation()].timerFrames;
-            this.animationFrame++;
-            if (PLAYER_ANIMATIONS[this.animation()].loop) {
-                this.animationFrame %= PLAYER_ANIMATIONS[this.animation()].frames;
-            }
-            else {
-                this.animationFrame = Math.min(this.animationFrame, PLAYER_ANIMATIONS[this.animation()].frames - 1);
-            }
-        }
     }
     else {
-        this.frameTimer = PLAYER_ANIMATIONS.stand.timerFrames;
-        this.animationFrame = 0;
         this.moving = false;
+        if (this.animation() == 'stand') {
+            this.animationFrame = 0;
+        }
+    }
+    if (this.frameTimer > 0 ) {
+        this.frameTimer--;
+    }
+    else {
+        this.frameTimer = PLAYER_ANIMATIONS[this.animation()].timerFrames;
+        this.animationFrame++;
+        if (PLAYER_ANIMATIONS[this.animation()].loop) {
+            this.animationFrame %= PLAYER_ANIMATIONS[this.animation()].frames;
+        }
+        else {
+            this.animationFrame = Math.min(this.animationFrame, PLAYER_ANIMATIONS[this.animation()].frames - 1);
+        }
     }
     handleEntityCollision(this);
     if (this.healing) {
@@ -210,13 +212,16 @@ Player.prototype.animationFilename = function() {
 
 Player.prototype.draw = function() {
     var image;
+    animation = PLAYER_ANIMATIONS[this.animation()];
+    var xOffset = animation.xOffset || 0;
+    var yOffset = animation.yOffset || 0;
     if (this.facing == directions.left) {
         image = 'player-' + this.animationFilename() + '-left' + this.animationFrame + '.png';
     }
     else if (this.facing == directions.right) {
         image = 'player-' + this.animationFilename() + '-right' + this.animationFrame + '.png';
     }
-    drawImage(image, this.x, this.y);
+    drawImage(image, this.x + xOffset, this.y + yOffset);
 };
 
 Player.prototype.handleEntityCollision = function(entity) {
