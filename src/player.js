@@ -216,7 +216,7 @@ Player.prototype.draw = function() {
     }
     var image;
     animation = PLAYER_ANIMATIONS[this.animation()];
-    var xOffset = animation.xOffset || 0;
+    var xOffset = animation.xOffset - 10 || -10;
     var yOffset = animation.yOffset || 0;
     if (this.facing == directions.left) {
         image = 'player-' + this.animationFilename() + '-left' + this.animationFrame + '.png';
