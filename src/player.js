@@ -211,6 +211,9 @@ Player.prototype.animationFilename = function() {
 }
 
 Player.prototype.draw = function() {
+    if (SHOW_HITBOXES) {
+        Entity.prototype.draw.call(this);
+    }
     var image;
     animation = PLAYER_ANIMATIONS[this.animation()];
     var xOffset = animation.xOffset || 0;

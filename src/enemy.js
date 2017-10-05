@@ -58,6 +58,9 @@ Enemy.prototype.damage = function(entity) {
 }
 
 Enemy.prototype.draw = function() {
+    if (SHOW_HITBOXES) {
+        Entity.prototype.draw.call(this);
+    }
     if (this.facingRight) {
         drawImage('enemy-stand-right.png', this.x, this.y - 12, false, this.filter);
     }

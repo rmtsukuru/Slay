@@ -17,7 +17,7 @@ function Sword(x, y, horizontal) {
         this.width = SWORD_WIDTH;
         this.height = SWORD_LENGTH;
     }
-    this.color = '#f33';
+    this.color = '#ff0';
     this.invisible = true;
     this.active = false;
     this.activationTimer = SWORD_TIMER_FRAMES;
@@ -65,5 +65,11 @@ Sword.prototype.damage = function(entity) {
     }
     else {
         return SWORD_DAMAGE;
+    }
+}
+
+Sword.prototype.draw = function() {
+    if (SHOW_HITBOXES) {
+        Entity.prototype.draw.call(this);
     }
 }
