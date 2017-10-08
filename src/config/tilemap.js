@@ -23,9 +23,7 @@ var mapData = {
             [29, 17, 1],
         ],
         entities: [
-            function() { return new Warp(-32, 608, 2, 950, 640); },
-            function() { return new Warp(-32, 640, 2, 950, 640); },
-            function() { return new Warp(-32, 672, 2, 950, 640); },
+            function() { return new Warp(-32, 608, 32, 96, 2, 950, 640); },
             function() { return new Enemy(700, 400, false); },
             function() { return new Upgrade(920, 512, 1); },
         ],
@@ -47,7 +45,7 @@ var mapData = {
             [12, 43, 1]
         ],
         entities: [
-            function() { return new Warp(512, 283, 0, 279, 120); }
+            function() { return new Warp(512, 283, 32, 32, 0, 279, 120); }
         ]
     },
     2: {
@@ -63,9 +61,7 @@ var mapData = {
         ],
         entities: [
             function() { return new Fountain(450, 608); },
-            function() { return new Warp(1024, 608, 0, 50, 640); },
-            function() { return new Warp(1024, 640, 0, 50, 640); },
-            function() { return new Warp(1024, 672, 0, 50, 640); },
+            function() { return new Warp(1024, 608, 32, 96, 0, 50, 640); },
         ]
     },
 };

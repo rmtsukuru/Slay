@@ -1,7 +1,8 @@
-function Warp(x, y, destinationMap, destinationX, destinationY) {
+function Warp(x, y, width, height, destinationMap, destinationX, destinationY) {
     Entity.call(this, x, y);
     this.color = '#3f0';
-    this.width = this.height = TILE_SIZE;
+    this.width = width || TILE_SIZE;
+    this.height = height || TILE_SIZE;
     this.destinationMap = destinationMap;
     this.destinationX = destinationX;
     this.destinationY = destinationY;
