@@ -17,15 +17,9 @@ var mapData = {
             [1, 20, 0],
             [0, 21, 0],
             [1, 21, 0],
-            [2, 18, 1],
-            [3, 18, 1],
-            [28, 17, 1],
-            [29, 17, 1],
         ],
         entities: [
-            function() { return new Warp(-32, 608, 32, 96, 2, 950, 640); },
-            function() { return new Enemy(700, 400, false); },
-            function() { return new Upgrade(920, 512, 1); },
+            function() { return new Warp(-32, 608, 32, 96, 3, 950, 640); },
         ],
         onStartup: function() {
             console.log('Level 0 loaded');
@@ -61,7 +55,66 @@ var mapData = {
         ],
         entities: [
             function() { return new Fountain(450, 608); },
+            function() { return new Warp(1024, 608, 32, 96, 4, 50, 640); },
+        ]
+    },
+    3: {
+        tileWidth: mapTileWidth,
+        tileHeight: mapTileHeight,
+        tiles: [
+            [0, 19, 0],
+            [1, 19, 0],
+            [0, 20, 0],
+            [1, 20, 0],
+            [0, 21, 0],
+            [1, 21, 0],
+            [30, 19, 0],
+            [31, 19, 0],
+            [30, 20, 0],
+            [31, 20, 0],
+            [30, 21, 0],
+            [31, 21, 0],
+            [20, 21, 1],
+            [21, 21, 1],
+            [21, 20, 1],
+        ],
+        entities: [
+            function() { return new Warp(-32, 608, 32, 96, 4, 950, 640); },
             function() { return new Warp(1024, 608, 32, 96, 0, 50, 640); },
+            function() { return new Enemy(700, 400, false); },
+        ]
+    },
+    4: {
+        tileWidth: mapTileWidth,
+        tileHeight: mapTileHeight * 2,
+        tiles: [
+            [0, 19, 0],
+            [1, 19, 0],
+            [0, 20, 0],
+            [1, 20, 0],
+            [0, 21, 0],
+            [1, 21, 0],
+            [30, 19, 0],
+            [31, 19, 0],
+            [30, 20, 0],
+            [31, 20, 0],
+            [30, 21, 0],
+            [31, 21, 0],
+            [2, 22, 1],
+            [3, 22, 1],
+            [4, 22, 1],
+            [12, 22, 1],
+            [13, 22, 1],
+            [14, 22, 1],
+            [21, 22, 1],
+            [22, 22, 1],
+            [28, 22, 1],
+            [29, 22, 1],
+        ],
+        entities: [
+            function() { return new Warp(-32, 608, 32, 96, 2, 950, 640); },
+            function() { return new Warp(1024, 608, 32, 96, 3, 50, 640); },
+            function() { return new Upgrade(400, 200, 1); },
         ]
     },
 };
