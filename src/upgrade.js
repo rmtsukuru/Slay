@@ -20,7 +20,9 @@ Upgrade.prototype.update = function() {
         this.remove();
     }
 
+    this.yVelocity = 0;
     this.handleGravity();
+    handleTileCollision(this);
     Entity.prototype.update.call(this);
     handleEntityCollision(this);
 }
