@@ -11,11 +11,16 @@ function Upgrade(x, y, id, amount) {
 
 Upgrade.prototype = Object.create(Entity.prototype);
 
+Upgrade.prototype.hasGravity = function() {
+    return true;
+}
+
 Upgrade.prototype.update = function() {
     if (upgradesCollected.includes(this.id)) {
         this.remove();
     }
 
+    this.handleGravity();
     Entity.prototype.update.call(this);
     handleEntityCollision(this);
 }
