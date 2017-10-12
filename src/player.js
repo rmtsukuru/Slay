@@ -14,6 +14,7 @@ const PLAYER_HEAL_RATE = 100 / FPS;
 const PLAYER_ANIMATIONS = {
     stand: { frames: 1, timerFrames: 1 },
     run: { frames: 8, timerFrames: 10, loop: true },
+    fall: { frames: 1, timerFrames: 1, filename: "jump" },
     jump: { frames: 1, timerFrames: 1 },
     flinch: { frames: 1, timerFrames: 1, filename: "jump" },
     slash: { frames: 3, timerFrames: 6, xOffset: -43, yOffset: -10 },
@@ -189,11 +190,14 @@ Player.prototype.animation = function() {
     else if (this.jumping) {
         return 'jump';
     }
-    else if (this.moving) {
-        return 'run';
-    }
     else if (this.swordDrawn) {
         return 'slash';
+    }
+    else if (!this.onGround) {
+        return 'fall';
+    }
+    else if (this.moving) {
+        return 'run';
     }
     else {
         return 'stand';
