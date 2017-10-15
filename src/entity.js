@@ -1,5 +1,5 @@
 const BASE_GRAVITY = 3;
-const BASE_TERMINAL_VELOCITY = 7;
+const BASE_TERMINAL_VELOCITY = 8;
 const JUMP_MULTIPLIER = 2;
 
 var entities = [];

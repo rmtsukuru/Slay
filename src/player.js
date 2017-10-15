@@ -1,6 +1,6 @@
 const PLAYER_SPEED = 5;
-const PLAYER_JUMP_MAX = 0.3 * FPS;
-const PLAYER_GRAVITY = 5;
+const PLAYER_JUMP_MAX = 0.36 * FPS;
+const PLAYER_GRAVITY = 2;
 const PLAYER_HAS_GRAVITY = true;
 const PLAYER_DEBUG_SPEED = 10;
 const PLAYER_SIZE = 20;
