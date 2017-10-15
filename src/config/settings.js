@@ -3,5 +3,6 @@ const BGM_VOLUME = 0.4;
 const MUTE_BGM = false;
 const DEBUG_DISPLAY = true;
 const DEBUG_SPEED = false;
+const DEBUG_KILL = false;
 const DEBUG_DAMAGE = false;
 const SHOW_HITBOXES = false;

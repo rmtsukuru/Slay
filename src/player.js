@@ -89,7 +89,7 @@ Player.prototype.update = function() {
     else {
         this.xVelocity = 0;
         this.yVelocity = 0;
-        if (triggerKeyState.x) {
+        if (DEBUG_KILL && triggerKeyState.x) {
             scene = new DeathScene();
         }
         if (!this.swordDrawn) {
