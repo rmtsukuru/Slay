@@ -1,4 +1,5 @@
 const BASE_GRAVITY = 3;
+const BASE_TERMINAL_VELOCITY = 7;
 const JUMP_MULTIPLIER = 2;
 
 var entities = [];
@@ -30,14 +31,20 @@ Entity.prototype.gravityAmount = function() {
     return BASE_GRAVITY;
 }
 
+Entity.prototype.terminalVelocity = function() {
+    return BASE_TERMINAL_VELOCITY;
+}
+
 Entity.prototype.handleGravity = function(reverse) {
     reverse = reverse || false;
     if (this.hasGravity()) {
         if (reverse) {
             this.yVelocity -= this.gravityAmount() * JUMP_MULTIPLIER;
+            this.yVelocity = Math.max(this.yVelocity, -1 * this.terminalVelocity());
         }
         else {
             this.yVelocity += this.gravityAmount();
+            this.yVelocity = Math.min(this.yVelocity, this.terminalVelocity());
         }
     }
 }

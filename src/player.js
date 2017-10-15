@@ -88,7 +88,6 @@ Player.prototype.update = function() {
     }
     else {
         this.xVelocity = 0;
-        this.yVelocity = 0;
         if (DEBUG_KILL && triggerKeyState.x) {
             scene = new DeathScene();
         }
