@@ -11,7 +11,8 @@ var keys = {
     q: 81,
     space: 32,
     shift: 16,
-    control: 17
+    control: 17,
+    x: 88,
 };
 
 var keyState, triggerKeyState;

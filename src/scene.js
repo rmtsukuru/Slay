@@ -1,6 +1,8 @@
 const FADE_TIMER_FRAMES = 4 * FPS;
 const FADEOUT_TIMER_FRAMES = 4 * FPS;
 const UPDATE_THRESHOLD = 0.1;
+const DEATH_FALL_SPEED = 5;
+const DEATH_FALL_BUFFER = 200;
 
 var scene;
 
@@ -24,6 +26,37 @@ GameScene.prototype = Object.create(Scene.prototype);
 GameScene.prototype.update = function() {
     update();
 };
+
+function DeathScene() {
+    Scene.call(this);
+}
+
+DeathScene.prototype = Object.create(Scene.prototype);
+
+DeathScene.prototype.animationDone = function() {
+    return player.y > cameraY + canvasHeight + DEATH_FALL_BUFFER;
+}
+
+DeathScene.prototype.update = function() {
+    if (this.animationDone()) {
+        if (initialKeyPress) {
+            resetGame();
+            scene = new TransitionScene();
+        }
+    }
+    else {
+        player.y += DEATH_FALL_SPEED;
+        initialKeyPress = false;
+    }
+}
+
+DeathScene.prototype.draw = function() {
+    Scene.prototype.draw.call(this);
+    if (this.animationDone()) {
+        drawRect(0, 0, canvasWidth, canvasHeight, 'rgba(60, 0, 0, .8)', true);
+        drawText('You have died. Press any key to restart.', canvasWidth / 2 - 400, canvasHeight / 2, 'VT323', '50px', '#fff', true);
+    }
+}
 
 function TransitionScene(fadeOut) {
     Scene.call(this);

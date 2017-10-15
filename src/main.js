@@ -5,17 +5,11 @@ var currentMap;
 var minimapEnabled = false;
 
 window.onload = function() {
-    player = new Player(300, 200); 
-    entities.push(player);
-    configureGraphics(player);
+    configureGraphics();
     configureInput();
     configureAudio();
-    configureGame();
+    resetGame();
     scene = new TitleScene();
-
-    for (var i = 0; i < FPS; i++) {
-        update();
-    }
 
     mainLoop = function() {
         scene.update();

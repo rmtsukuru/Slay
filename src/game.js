@@ -6,9 +6,18 @@ var hudHP, hudHPTimer, hudHPDelayed;
 
 var upgradesCollected = [];
 
-function configureGame() {
+function resetGame() {
+    player = new Player(300, 200); 
     currentMap = STARTING_MAP;
     loadMap();
+
+    for (var i = 0; i < FPS; i++) {
+        update();
+    }
+}
+
+function configureGame() {
+    resetGame();
 }
 
 function update() {

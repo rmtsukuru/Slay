@@ -89,6 +89,9 @@ Player.prototype.update = function() {
     else {
         this.xVelocity = 0;
         this.yVelocity = 0;
+        if (triggerKeyState.x) {
+            scene = new DeathScene();
+        }
         if (!this.swordDrawn) {
             if (triggerKeyState.z) {
                 var sword;
@@ -240,6 +243,9 @@ Player.prototype.handleEntityCollision = function(entity) {
     }
     else if (entity.damage() > 0 && !entity.friendly && !this.flinching) {
         this.health -= entity.damage();
+        if (this.health <= 0) {
+            scene = new DeathScene();
+        }
         this.flinching = true;
         hudHPDelayed = true;
         if (entity.x > this.x) {
