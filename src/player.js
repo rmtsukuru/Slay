@@ -242,6 +242,7 @@ Player.prototype.handleEntityCollision = function(entity) {
         this.healing = true;
     }
     else if (entity.damage() > 0 && !entity.friendly && !this.flinching) {
+        playSound('hit0', 0.8);
         this.health -= entity.damage();
         if (this.health <= 0) {
             scene = new DeathScene();
