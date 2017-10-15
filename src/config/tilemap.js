@@ -110,11 +110,14 @@ var mapData = {
             [22, 22, 1],
             [28, 22, 1],
             [29, 22, 1],
+            [15, 30, 1],
+            [16, 30, 1],
         ],
         entities: [
             function() { return new Warp(-32, 608, 32, 96, 2, 950, 640); },
             function() { return new Warp(1024, 608, 32, 96, 3, 50, 640); },
             function() { return new Upgrade(400, 200, 1); },
+            function() { return new Enemy(500, 1000, false); },
         ]
     },
 };
