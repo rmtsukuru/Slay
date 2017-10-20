@@ -92,7 +92,7 @@ Player.prototype.update = function() {
             scene = new DeathScene();
         }
         if (!this.swordDrawn) {
-            if (triggerKeyState.z) {
+            if (triggerKeyState.s) {
                 var sword;
                 if (this.facing == directions.left) {
                     sword = new Sword(this.x - 32, this.y + 12, true);
@@ -112,10 +112,10 @@ Player.prototype.update = function() {
                 this.animationFrame = 0;
             }
             else {
-                if (keyState.left || keyState.a) {
+                if (keyState.left) {
                     this.xVelocity -= this.speed();
                 }
-                if (keyState.right || keyState.d) {
+                if (keyState.right) {
                     this.xVelocity += this.speed();
                 }
 
