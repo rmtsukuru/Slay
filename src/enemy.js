@@ -1,5 +1,6 @@
 const FLASH_TIMER_FRAMES = 0.05 * FPS;
 const STRAFE_TIMER_FRAMES = 1.8 * FPS;
+const ENEMY_FLINCH_FRAMES = 0.3 * FPS;
 const ENEMY_SPEED = 3;
 const ENEMY_DAMAGE = 10;
 
@@ -16,9 +17,27 @@ function Enemy(x, y, facingRight) {
 Enemy.prototype = Object.create(Entity.prototype);
 
 Enemy.prototype.update = function() {
-    this.xVelocity = ENEMY_SPEED;
-    if (!this.facingRight) {
-        this.xVelocity *= -1;
+    if (this.flinching) {
+        if (this.flinchTimer > 0) {
+            this.flinchTimer--;
+        }
+        else {
+            this.flinching = false;
+            this.xVelocity = 0;
+        }
+    }
+    else {
+        this.xVelocity = ENEMY_SPEED;
+        if (!this.facingRight) {
+            this.xVelocity *= -1;
+        }
+        if (this.strafeTimer > 0) {
+            this.strafeTimer--;
+        }
+        else {
+            this.strafeTimer = STRAFE_TIMER_FRAMES;
+            this.facingRight = !this.facingRight;
+        }
     }
     this.yVelocity = 0;
     this.handleGravity();
@@ -32,13 +51,6 @@ Enemy.prototype.update = function() {
         this.color = '#33b';
         this.filter = null;
     }
-    if (this.strafeTimer > 0) {
-        this.strafeTimer--;
-    }
-    else {
-        this.strafeTimer = STRAFE_TIMER_FRAMES;
-        this.facingRight = !this.facingRight;
-    }
     handleEntityCollision(this);
     Entity.prototype.update.call(this);
 };
@@ -50,6 +62,15 @@ Enemy.prototype.handleEntityCollision = function(entity) {
         if (this.health <= 0) {
             this.remove();
         }
+        this.flinching = true;
+        this.xVelocity = ENEMY_SPEED + 1;
+        if (entity.x > this.x) {
+            this.xVelocity *= -1;
+        }
+        else {
+            this.facingRight = false;
+        }
+        this.flinchTimer = ENEMY_FLINCH_FRAMES;
     }
 };
 
