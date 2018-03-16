@@ -88,11 +88,11 @@ Player.prototype.update = function() {
     }
     else {
         this.xVelocity = 0;
-        if (DEBUG_KILL && triggerKeyState.x) {
+        if (DEBUG_KILL && triggerKeyState.k) {
             scene = new DeathScene();
         }
         if (!this.swordDrawn) {
-            if (triggerKeyState.s) {
+            if (triggerKeyState.x) {
                 var sword;
                 if (this.facing == directions.left) {
                     sword = new Sword(this.x - 32, this.y + 12, true);
@@ -119,11 +119,11 @@ Player.prototype.update = function() {
                     this.xVelocity += this.speed();
                 }
 
-                if (triggerKeyState.space) {
+                if (triggerKeyState.z) {
                     this.jumping = true;
                     this.animationFrame = 0;
                 }
-                else if (!keyState.space) {
+                else if (!keyState.z) {
                     this.jumping = false;
                 }
 
